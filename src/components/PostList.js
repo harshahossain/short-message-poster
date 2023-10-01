@@ -5,52 +5,28 @@ import NewPost from "./NewPost";
 import Modal from "./Modal";
 
 function PostList({ isPosting, onStopPosting }) {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
-
-  // function modalIsVisibleHandler(event) {
-  //   setModalIsVisible(!modalIsVisible);
-  // }
-  function bodyChangeHandler(event) {
-    setEnteredBody(event.target.value);
-  }
-  function authorChangeHandler(event) {
-    setEnteredAuthor(event.target.value);
-  }
-  // let modalConent;
-  // if (modalIsVisible) {//props.onStopPosting
-  //   modalConent = (
-  //     <Modal onClose={onStopPosting}>
-  //       <NewPost
-  //         onBodyChange={bodyChangeHandler}
-  //         onAuthorChange={authorChangeHandler}
-  //       />
-  //     </Modal>
-  //   );
-  // }
+  const [posts, setPosts] = useState([]);
+  function addPostHandler(postData) {
+    setPosts((existingPost) => [postData, ...existingPost]);
+  } //if new post or stae updates the old state then we should use the arrow fucntion format// ebong uporer state ta empty array ejonene nah. nw state old state er upor depend korlei dite hobe
   return (
     <>
-      {/* {modalIsVisible ? (
-        <Modal onClose={hideModalHandler}>
-          <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
-          />
-        </Modal>
-      ) : null} */}
-      {/* {modalConent} */}
       {isPosting && (
         <Modal onClose={onStopPosting}>
           <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
+            // onBodyChange={bodyChangeHandler}
+            // onAuthorChange={authorChangeHandler}
             onCancel={onStopPosting}
+            onAddPost={addPostHandler}
           />
         </Modal>
       )}
       <ul className={classes.posts}>
-        <Post author={enteredAuthor} body={enteredBody} />
-        <Post author="Nuer" body="I used to be the best Golie" />
+        {/* <Post author={enteredAuthor} body={enteredBody} /> */}
+        {/* <Post author="Nuer" body="I used to be the best Golie" /> */}
+        {posts.map((p) => (
+          <Post key={p.id} author={p.author} body={p.body} />
+        ))}
       </ul>
     </>
   );
