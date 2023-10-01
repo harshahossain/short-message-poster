@@ -21,13 +21,31 @@ function PostList({ isPosting, onStopPosting }) {
           />
         </Modal>
       )}
-      <ul className={classes.posts}>
-        {/* <Post author={enteredAuthor} body={enteredBody} /> */}
-        {/* <Post author="Nuer" body="I used to be the best Golie" /> */}
-        {posts.map((p) => (
-          <Post key={p.id} author={p.author} body={p.body} />
-        ))}
-      </ul>
+      {posts.length > 0 ? (
+        <ul className={classes.posts}>
+          {posts.map((p) => (
+            <Post key={p.id} author={p.author} body={p.body} />
+          ))}
+        </ul>
+      ) : (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet.</h2>
+          <p>Start adding some!</p>
+        </div>
+      )}
+      {/* {posts.length > 0 && (
+        <ul className={classes.posts}>
+          {posts.map((p) => (
+            <Post key={p.id} author={p.author} body={p.body} />
+          ))}
+        </ul>
+      )}
+      {posts.length === 0 && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet.</h2>
+          <p>Start adding some!</p>
+        </div>
+      )} */}
     </>
   );
 }

@@ -20,7 +20,7 @@ function App() {
     <>
       <MainHeader onCreatePost={showModalHandler} />
       <main className="App">
-        <h1>BAck to Square 1</h1>
+        {/* <h1>BAck to Square 1</h1> */}
         <PostList isPosting={modalIsVisible} onStopPosting={hideModalHandler} />
       </main>
     </>
